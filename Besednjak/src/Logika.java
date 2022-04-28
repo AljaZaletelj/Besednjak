@@ -6,4 +6,18 @@ public class Logika {
 
 	}
 
+	
+	protected String z = "zelena";
+	protected String r = "rumena";
+	protected String b = "bela";
+	protected int steviloPoskusov = 5;
+	
+	
+	// funkcija izberiKljuc - iz datoteke besed izbere neko besedo.
+	
+	
+	
+	
+	
+	
 }
