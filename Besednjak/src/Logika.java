@@ -1,11 +1,13 @@
 
 public class Logika {
 
-	public static void main(String[] args) {
-		
-
+	static String geslo = "SONCE";
+	
+	public static Besednjak novaIgra() {
+		Besednjak igra = new Besednjak(geslo);
+		return igra;
 	}
-
+	
 	
 	
 	

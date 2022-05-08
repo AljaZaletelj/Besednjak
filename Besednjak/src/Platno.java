@@ -19,6 +19,7 @@ public class Platno  extends JPanel{
 	protected Stroke debelinaPovezave;
 	protected int fontSize = 36;
 	
+	
 	public Platno(int sirina, int visina) {
 		super();
 		setPreferredSize(new Dimension(1000, 600));
@@ -59,9 +60,19 @@ public class Platno  extends JPanel{
 		for (int i = 0; i < 6; i++) {	
 			g.drawLine(round(x1), round(y1 + (i * visinaKvadrata)) , round(x6 - 3), round(y1 + (i * visinaKvadrata)));
 			g.drawLine(round(x1 + (i*sirinaKvadrata)), round(y1) , round(x1 + (i*sirinaKvadrata)), round(y6));
+		
+		for (int v = 0; v < 5; v++) {
+			for (int j = 0; j < 5; j++) {
+				g.drawString(
+						String.valueOf(Okno.besednjak.ugibanja[v][j]), 
+						round(x1 + (j*sirinaKvadrata)), 
+						round(y1 + (v * visinaKvadrata)));
+		}}
 			
 		
-			
+		
+		repaint();
+		
 		
 		}
 		

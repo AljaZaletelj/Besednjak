@@ -64,6 +64,7 @@ public class Besednjak {
 	}
 	
 	public void igraj(String poskus) {
+		poskus = poskus.toUpperCase();
         if (zmaga(poskus)) stanje = zmaga;  		
         else if (poraz()) stanje = poraz;
         else {

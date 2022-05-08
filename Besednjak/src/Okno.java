@@ -15,6 +15,7 @@ public class Okno extends JFrame implements ActionListener {
 	
 	protected Platno platno;
 	private JMenuItem menuNovaIgra, menuIzhod;
+	protected static Besednjak besednjak;
 	JButton gumb;
 	JTextField textField;
 	
@@ -32,6 +33,8 @@ public class Okno extends JFrame implements ActionListener {
 		platno.add(gumb);
 		platno.add(textField);
 		add(platno);
+		
+		besednjak = Logika.novaIgra();
 		
 		
 		JMenuBar menubar = new JMenuBar();
@@ -65,11 +68,16 @@ public class Okno extends JFrame implements ActionListener {
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
 		else if (source == menuNovaIgra) {
-			// Še za napisat,kaj se zgodi za menuNovaIgra
+			besednjak = Logika.novaIgra();
 		}
 		else if (e.getSource() == gumb) {
-			textField.getText(); 
-			// Tukejle se bo povezal z besednjakom, da dobi ugib besednjak in potem zaène.
+			besednjak.igraj(textField.getText()); 
+			System.out.print(besednjak.stanje[0]);
+			System.out.print(besednjak.stanje[1]);
+			System.out.print(besednjak.stanje[2]);
+			System.out.print(besednjak.stanje[3]);
+			System.out.print(besednjak.stanje[4] + "\n");
+			System.out.print(besednjak.steviloNapak);
 		}
 	}
 	
