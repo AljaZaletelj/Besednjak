@@ -68,6 +68,18 @@ public class Platno  extends JPanel{
 						round(x1 + (j*sirinaKvadrata)), 
 						round(y1 + (v * visinaKvadrata)));
 		}}
+		
+		
+		if (Okno.besednjak.stanje == Besednjak.zacetek) {
+			g.drawString("ZAÈETEK", round(3 * sirina / 4), round(visina/3));
+			}
+		else if (Okno.besednjak.stanje.equals(Besednjak.zmaga)) {
+			g.drawString("ZMAGAL SI", round(3 * sirina / 4), round(visina/3));
+			}
+		else if (Okno.besednjak.stanje == Besednjak.poraz) {
+			g.drawString("PORAZ", round(3 * sirina / 4), round(visina/3));
+			}
+		else g.drawString("ŠE VEDNO IGRAŠ", round(3 * sirina / 4), round(visina/3));
 			
 		
 		

@@ -9,9 +9,9 @@ public class Besednjak {
 	protected char[][] ugibanja; // podobno kot poskusi, le da ne zapisuje rezultatov paè pa samo zgodovino 
 	protected String crke = "ABCÈDEFGHIJKLMNOPRSŠTUVZŽabcèdefghijklmnoprsštuvzž";
 	protected int steviloNapak;
-	protected Barva[] zmaga = {Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA};
-	protected Barva[] zacetek;
-	protected Barva[] poraz;
+	protected static Barva[] zmaga = {Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA};
+	protected static Barva[] zacetek;
+	protected static Barva[] poraz;
 	protected Barva[] stanje;
 	
 	
@@ -22,6 +22,7 @@ public class Besednjak {
 		this.stanje = zacetek;
 		this.ugibanja = new char[steviloPoskusov][5];
 	}
+	
 	
 	@Override  
 	public String toString() {
