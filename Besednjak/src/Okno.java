@@ -72,6 +72,7 @@ public class Okno extends JFrame implements ActionListener {
 		}
 		else if (e.getSource() == gumb) {
 			besednjak.igraj(textField.getText()); 
+			
 			System.out.print(besednjak.stanje[0]);
 			System.out.print(besednjak.stanje[1]);
 			System.out.print(besednjak.stanje[2]);

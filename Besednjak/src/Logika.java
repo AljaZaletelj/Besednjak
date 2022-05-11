@@ -1,22 +1,16 @@
-
 public class Logika {
 
-	static String geslo = "SONCE";
+	static String geslo = "DREVO";
+	
+	
+	public static String dolociGeslo() {
+		
+	}
 	
 	public static Besednjak novaIgra() {
 		Besednjak igra = new Besednjak(geslo);
 		return igra;
 	}
-	
-	
-	
-	
-	
-	// funkcija izberiKljuc - iz datoteke besed izbere neko besedo.
-	
-	
-	
-	
 	
 	
 }

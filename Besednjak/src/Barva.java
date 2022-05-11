@@ -1,6 +1,6 @@
 
 public enum Barva {
 	
-	 ZELENA, RUMENA, BELA;
+	 ZELENA, RUMENA, BELA, RDECA;
 
 }
