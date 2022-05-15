@@ -6,8 +6,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 
@@ -23,6 +25,7 @@ public class Platno  extends JPanel{
 	protected Color barvaOzadja = Color.cyan;
 	protected static String naslov = "BESEDNJAK";
 	Zvok zvok = new Zvok();
+	private BufferedImage slika;
 	  
 	
 	public Platno(int sirina, int visina) {
@@ -31,6 +34,11 @@ public class Platno  extends JPanel{
 		setBackground(barvaOzadja);
 		
 		this.debelinaPovezave = new BasicStroke(3);
+		
+		try {
+			slika = ImageIO.read(getClass().getResourceAsStream("konfeti.png"));
+		}catch (IOException e) {}
+		
 	}
 	
 	
@@ -98,6 +106,7 @@ public class Platno  extends JPanel{
 		else if (Okno.besednjak.stanje.equals(Besednjak.zmaga)) {
 			g.drawString("ZMAGAL SI", round(5 * sirina / 8), round(visina/3));
 			setBackground(new Color(0,121,0));
+			g.drawImage(slika, -sirina, 10, 2 * sirina , visina + 100, null);
 			}
 		else if (Okno.besednjak.stanje == Besednjak.poraz) {
 			g.drawString("PORAZ", round(5 * sirina / 8), round(visina/3));
@@ -111,6 +120,9 @@ public class Platno  extends JPanel{
 		
 		
 		}
+		
+		
+		
 		
 		repaint();
 		
@@ -128,6 +140,7 @@ public class Platno  extends JPanel{
 		
 		zvok.play();
 	}
+	
 	
 	
 	
