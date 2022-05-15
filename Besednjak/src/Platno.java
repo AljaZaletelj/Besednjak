@@ -6,9 +6,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.io.IOException;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 
 
 
@@ -19,7 +21,9 @@ public class Platno  extends JPanel{
 	protected Stroke debelinaPovezave;
 	protected int fontSize = 36;
 	protected Color barvaOzadja = Color.cyan;
-	
+	protected static String naslov = "BESEDNJAK";
+	Zvok zvok = new Zvok();
+	  
 	
 	public Platno(int sirina, int visina) {
 		super();
@@ -40,16 +44,17 @@ public class Platno  extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setStroke(debelinaPovezave);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.black);
 		
 		int sirina = getWidth();
 		int visina = getHeight();
 		
-		double xBeseda = sirina / 2 ; // Tukej bi bilo treba popravit, da bi bil text res v centru
-		double yBeseda = visina / 7;
-		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
-		g.drawString("BESEDNJAK", round(xBeseda), round(yBeseda));
+		double xBeseda = 4 * sirina / 10 ; 
+		double yBeseda = 1 * visina / 7;
+		g.setFont(new Font("Serif", Font.BOLD, 45)); 
+		g.drawString(naslov, round(xBeseda), round(yBeseda));
 		
+		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
 		double y1 = visina/4;
 		double y6 = 3 * visina/4;
 		double visinaKvadrata = (y6 - y1) / 5;
@@ -57,6 +62,9 @@ public class Platno  extends JPanel{
 		double x1 = sirina / 7 /2;
 		double x6 = 6 * sirina / 7 /2;
 		double sirinaKvadrata = x1;
+		
+		Okno.gumb.setBounds(round(xBeseda), round(6 * yBeseda), 80, 35);
+		Okno.textField.setBounds(round(xBeseda + 90), round(6 * yBeseda), 200, 35);
 		
 		
 		for (int i = 0; i < Okno.besednjak.steviloNapak +1; i++) {
@@ -89,25 +97,36 @@ public class Platno  extends JPanel{
 			}
 		else if (Okno.besednjak.stanje.equals(Besednjak.zmaga)) {
 			g.drawString("ZMAGAL SI", round(5 * sirina / 8), round(visina/3));
+			setBackground(new Color(0,121,0));
 			}
 		else if (Okno.besednjak.stanje == Besednjak.poraz) {
 			g.drawString("PORAZ", round(5 * sirina / 8), round(visina/3));
 			g.drawString("Geslo je bilo: " + Okno.besednjak.geslo, round(5 * sirina / 8), round(visina/2));
 			setBackground(Color.RED);
 			}
-		else g.drawString("ŠE VEDNO IGRAŠ", round(5 * sirina / 8), round(visina/3));
+		else { 
+			g.drawString("ŠE VEDNO IGRAŠ", round(5 * sirina / 8), round(visina/3));
+			}
 			
 		
 		
 		}
 		
-		
-		
-		
-		
 		repaint();
 		
 		
+	}
+
+	
+	
+	public void zaigrajGlasbo(int i) {
+		try {
+			zvok.setFile(i);
+			
+		} catch (UnsupportedAudioFileException | IOException e) {
+		}
+		
+		zvok.play();
 	}
 	
 	

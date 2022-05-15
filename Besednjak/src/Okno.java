@@ -1,4 +1,6 @@
+
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -16,23 +18,32 @@ public class Okno extends JFrame implements ActionListener {
 	protected Platno platno;
 	private JMenuItem menuNovaIgra, menuIzhod;
 	protected static Besednjak besednjak;
-	JButton gumb;
-	JTextField textField;
+	protected static JButton gumb;
+	public static JTextField textField;
+	
+	
 	
 	public Okno() {
 		super();
 		setTitle("Urejevalnik grafov");
 		platno = new Platno(1000, 1000);
 		
+		
 		gumb = new JButton("Poskusi");
 		gumb.addActionListener(this);
-		gumb.setBounds(100, 100, 300, 50);
+		gumb.setBounds(200, 100, 300, 50);
 		textField = new JTextField();
 		textField.setPreferredSize(new Dimension(250, 40));
+		textField.setFont(new Font("TimesRoman", Font.BOLD, 15));
+		textField.setBackground(platno.barvaOzadja);;
+		textField.setToolTipText("Napiši svoj poskus");
+		
 		
 		platno.add(gumb);
 		platno.add(textField);
 		add(platno);
+		
+		
 		
 		besednjak = Logika.novaIgra();
 		
@@ -69,9 +80,14 @@ public class Okno extends JFrame implements ActionListener {
 		}
 		else if (source == menuNovaIgra) {
 			besednjak = Logika.novaIgra();
+			platno.zaigrajGlasbo(2); 
 		}
 		else if (e.getSource() == gumb) {
-			besednjak.igraj(textField.getText()); 
+			besednjak.igraj(textField.getText());  
+			textField.setText("");
+			
+			if (besednjak.stanje.equals(Besednjak.zmaga)) platno.zaigrajGlasbo(0);
+			else if (besednjak.stanje == Besednjak.poraz) platno.zaigrajGlasbo(1);
 			
 			System.out.print(besednjak.stanje[0]);
 			System.out.print(besednjak.stanje[1]);
