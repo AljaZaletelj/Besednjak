@@ -10,28 +10,33 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class Okno extends JFrame implements ActionListener {
 	
 	protected Platno platno;
-	private JMenuItem menuNovaIgra, menuIzhod;
+	private JMenuItem menuNovaIgra, menuIzhod, menuNavodila;
 	protected static Besednjak besednjak;
 	protected static JButton gumb;
+	protected static JButton gumbNovaIgra;
 	public static JTextField textField;
 	
 	
 	
 	public Okno() {
 		super();
-		setTitle("Urejevalnik grafov");
+		setTitle("Besednjak");
 		platno = new Platno(1000, 1000);
 		
 		
 		gumb = new JButton("Poskusi");
 		gumb.addActionListener(this);
 		gumb.setBounds(200, 100, 300, 50);
+		gumbNovaIgra = new JButton("NOVA IGRA");
+		gumbNovaIgra.addActionListener(this);
+		
 		textField = new JTextField();
 		textField.setPreferredSize(new Dimension(250, 40));
 		textField.setFont(new Font("TimesRoman", Font.BOLD, 15));
@@ -39,13 +44,14 @@ public class Okno extends JFrame implements ActionListener {
 		textField.setToolTipText("Napiši svoj poskus");
 		
 		
-		platno.add(gumb);
-		platno.add(textField);
-		add(platno);
-		
 		
 		
 		besednjak = Logika.novaIgra();
+		
+		platno.add(gumbNovaIgra);
+		platno.add(gumb);
+		platno.add(textField);
+		add(platno);
 		
 		
 		JMenuBar menubar = new JMenuBar();
@@ -54,6 +60,7 @@ public class Okno extends JFrame implements ActionListener {
 		JMenu menuDatoteka = dodajMenu(menubar, "Menu");
 		
 		menuNovaIgra = dodajMenuItem(menuDatoteka, "Nova igra");
+		menuNavodila = dodajMenuItem(menuDatoteka, "Navodila");
 		menuIzhod = dodajMenuItem(menuDatoteka, "Izhod");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,19 +89,19 @@ public class Okno extends JFrame implements ActionListener {
 			besednjak = Logika.novaIgra();
 			platno.zaigrajGlasbo(2); 
 		}
+		else if (source == menuNavodila) {
+			JOptionPane.showMessageDialog(null, Navodila.navodilo, "Navodila", JOptionPane.PLAIN_MESSAGE);
+		}
 		else if (e.getSource() == gumb) {
 			besednjak.igraj(textField.getText());  
 			textField.setText("");
 			
 			if (besednjak.stanje.equals(Besednjak.zmaga)) platno.zaigrajGlasbo(0);
-			else if (besednjak.stanje == Besednjak.poraz) platno.zaigrajGlasbo(1);
-			
-			System.out.print(besednjak.stanje[0]);
-			System.out.print(besednjak.stanje[1]);
-			System.out.print(besednjak.stanje[2]);
-			System.out.print(besednjak.stanje[3]);
-			System.out.print(besednjak.stanje[4] + "\n");
-			System.out.print(besednjak.steviloNapak);
+			else if (besednjak.stanje == Besednjak.poraz) platno.zaigrajGlasbo(1);	
+		}
+		else if (source == gumbNovaIgra) {
+			besednjak = Logika.novaIgra();
+			platno.zaigrajGlasbo(2); 
 		}
 	}
 	

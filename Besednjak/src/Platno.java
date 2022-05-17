@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class Platno  extends JPanel{
 
 	protected Stroke debelinaPovezave;
-	protected int fontSize = 36;
+	protected static int fontSize = 36;
 	protected Color barvaOzadja = Color.cyan;
 	protected static String naslov = "BESEDNJAK";
 	Zvok zvok = new Zvok();
@@ -71,7 +71,9 @@ public class Platno  extends JPanel{
 		double x6 = 6 * sirina / 7 /2;
 		double sirinaKvadrata = x1;
 		
+		
 		Okno.gumb.setBounds(round(xBeseda), round(6 * yBeseda), 80, 35);
+		Okno.gumbNovaIgra.setBounds(1, 1, 1, 1);
 		Okno.textField.setBounds(round(xBeseda + 90), round(6 * yBeseda), 200, 35);
 		
 		
@@ -107,11 +109,19 @@ public class Platno  extends JPanel{
 			g.drawString("ZMAGAL SI", round(5 * sirina / 8), round(visina/3));
 			setBackground(new Color(0,121,0));
 			g.drawImage(slika, -sirina, 10, 2 * sirina , visina + 100, null);
+			Okno.gumbNovaIgra.setBounds(round(xBeseda), round(6 * yBeseda), 200, 50);
+			Okno.gumb.setBounds(1, 1, 1, 1);
+			Okno.textField.setBounds(1, 1, 1, 1);
+			
 			}
 		else if (Okno.besednjak.stanje == Besednjak.poraz) {
 			g.drawString("PORAZ", round(5 * sirina / 8), round(visina/3));
 			g.drawString("Geslo je bilo: " + Okno.besednjak.geslo, round(5 * sirina / 8), round(visina/2));
 			setBackground(Color.RED);
+			Okno.gumbNovaIgra.setBounds(round(xBeseda), round(6 * yBeseda), 200, 50);
+			Okno.gumb.setBounds(1, 1, 1, 1);
+			Okno.textField.setBounds(1, 1, 1, 1);
+			
 			}
 		else { 
 			g.drawString("ŠE VEDNO IGRAŠ", round(5 * sirina / 8), round(visina/3));
