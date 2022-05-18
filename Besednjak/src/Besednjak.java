@@ -5,8 +5,8 @@ public class Besednjak {
 	// primer poskusa izgleda :
 	//{{bela, bela, zelena, rumena, bela},  {<-},  {<-},  zmaga,  {null, null, null, null, null}}
 	protected static int STEVILO_POSKUSOV = 5;
-	protected char[][] ugibanja; // podobno kot poskusi, le da ne zapisuje rezultatov paè pa samo zgodovino 
-	protected String crke = "ABCÈDEFGHIJKLMNOPRSŠTUVZŽabcèdefghijklmnoprsštuvzž";
+	protected char[][] ugibanja; // podobno kot poskusi, le da ne zapisuje rezultatov paï¿½ pa samo zgodovino 
+	protected String crke = "ABCÄŒDEFGHIJKLMNOPRSÅ TUVZÅ½abcÄdefghijklmnoprsÅ¡tuvzÅ¾";
 	protected int steviloNapak;
 	protected static Barva[] zmaga = {Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA};
 	protected static Barva[] zacetek;

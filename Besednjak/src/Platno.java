@@ -102,7 +102,7 @@ public class Platno  extends JPanel{
 		
 		
 		if (Okno.besednjak.stanje == Besednjak.zacetek) {
-			g.drawString("ZAÈETEK", round(5 * sirina / 8 ), round(visina/3));
+			g.drawString("ZAÄŒETEK", round(5 * sirina / 8 ), round(visina/3));
 			setBackground(barvaOzadja);
 			}
 		else if (Okno.besednjak.stanje.equals(Besednjak.zmaga)) {
@@ -124,7 +124,7 @@ public class Platno  extends JPanel{
 			
 			}
 		else { 
-			g.drawString("ŠE VEDNO IGRAŠ", round(5 * sirina / 8), round(visina/3));
+			g.drawString("Å E VEDNO IGRAÅ ", round(5 * sirina / 8), round(visina/3));
 			}
 			
 		

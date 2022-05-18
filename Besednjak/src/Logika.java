@@ -12,7 +12,6 @@ public class Logika {
 		
 		while (vhod.ready()) {
 			String vrstica = vhod.readLine().trim();
-			// spremenit v UTF-8 ker ne delajo šumniki
 			String[] besede = vrstica.split(",");
 			int max = besede.length;
 			int randomNum = ThreadLocalRandom.current().nextInt(0, max);
