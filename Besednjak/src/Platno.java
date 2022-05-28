@@ -58,6 +58,7 @@ public class Platno  extends JPanel{
 		
 		double xBeseda = 4 * sirina / 10 ; 
 		double yBeseda = 1 * visina / 7;
+		// zapis naslova
 		g.setFont(new Font("Serif", Font.BOLD, 45)); 
 		g.drawString(naslov, round(xBeseda), round(yBeseda));
 		
@@ -70,12 +71,12 @@ public class Platno  extends JPanel{
 		double x6 = 6 * sirina / 7 /2;
 		double sirinaKvadrata = x1;
 		
-		
+		//gumbi in tectField
 		Okno.gumb.setBounds(round(xBeseda), round(6 * yBeseda), 80, 35);
 		Okno.gumbNovaIgra.setBounds(1, 1, 1, 1);
 		Okno.textField.setBounds(round(xBeseda + 90), round(6 * yBeseda), 200, 35);
 		
-		
+		//barvanje poskusa
 		for (int i = 0; i < Okno.besednjak.steviloNapak +1; i++) {
 			for (int j = 0; j < Besednjak.DOLZINA_BESEDE; j++) {
 				if (Okno.besednjak.poskusi[i][j] == Barva.RUMENA) g2.setColor(Color.YELLOW);
@@ -87,10 +88,12 @@ public class Platno  extends JPanel{
 		
 		g.setColor(Color.BLACK);
 		
-		for (int i = 0; i < 6; i++) {	
+		// mreža
+		for (int i = 0; i < (Besednjak.STEVILO_POSKUSOV + 1); i++) {	
 			g.drawLine(round(x1), round(y1 + (i * visinaKvadrata)) , round(x6 - 3), round(y1 + (i * visinaKvadrata)));
 			g.drawLine(round(x1 + (i*sirinaKvadrata)), round(y1) , round(x1 + (i*sirinaKvadrata)), round(y6));
 		
+		//izpis poskusa
 		for (int v = 0; v < Besednjak.STEVILO_POSKUSOV; v++) {
 			for (int j = 0; j < Besednjak.DOLZINA_BESEDE; j++) {
 				g.drawString(
@@ -99,7 +102,7 @@ public class Platno  extends JPanel{
 						round(y1 + (v * visinaKvadrata) + visinaKvadrata/3 *2 ));
 		}}
 		
-		
+		// Ločitev izpisa glede na stanje
 		if (Okno.besednjak.stanje == Besednjak.zacetek) {
 			g.drawString("ZAČETEK", round(5 * sirina / 8 ), round(visina/3));
 			setBackground(barvaOzadja);
@@ -111,7 +114,6 @@ public class Platno  extends JPanel{
 			Okno.gumbNovaIgra.setBounds(round(xBeseda), round(6 * yBeseda), 200, 50);
 			Okno.gumb.setBounds(1, 1, 1, 1);
 			Okno.textField.setBounds(1, 1, 1, 1);
-			
 			}
 		else if (Okno.besednjak.stanje == Besednjak.poraz) {
 			g.drawString("PORAZ", round(5 * sirina / 8), round(visina/3));
@@ -120,7 +122,6 @@ public class Platno  extends JPanel{
 			Okno.gumbNovaIgra.setBounds(round(xBeseda), round(6 * yBeseda), 200, 50);
 			Okno.gumb.setBounds(1, 1, 1, 1);
 			Okno.textField.setBounds(1, 1, 1, 1);
-			
 			}
 		else { 
 			g.drawString("ŠE VEDNO IGRAŠ", round(5 * sirina / 8), round(visina/3));
@@ -132,11 +133,9 @@ public class Platno  extends JPanel{
 	
 	public void zaigrajGlasbo(int i) {
 		try {
-			zvok.setFile(i);
-			
+			zvok.setFile(i);	
 		} catch (UnsupportedAudioFileException | IOException e) {
 		}
-		
 		zvok.play();
 	}
 	
