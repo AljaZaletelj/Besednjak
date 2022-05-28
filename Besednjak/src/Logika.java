@@ -7,6 +7,7 @@ public class Logika {
 	
 	
 	public static String izberiGeslo(String imeVhod) throws IOException {
+		// Iz datoteke pridobi random geslo
 		BufferedReader vhod = new BufferedReader(new FileReader(imeVhod));
 		String geslo = "";
 		
@@ -17,7 +18,6 @@ public class Logika {
 			int randomNum = ThreadLocalRandom.current().nextInt(0, max);
 			geslo = besede[randomNum];
 		}
-		
 		
 		vhod.close();
 		return geslo.toUpperCase();

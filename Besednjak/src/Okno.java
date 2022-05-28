@@ -30,7 +30,6 @@ public class Okno extends JFrame implements ActionListener {
 		setTitle("Besednjak");
 		platno = new Platno(1000, 1000);
 		
-		
 		gumb = new JButton("Poskusi");
 		gumb.addActionListener(this);
 		gumb.setBounds(200, 100, 300, 50);
@@ -41,10 +40,7 @@ public class Okno extends JFrame implements ActionListener {
 		textField.setPreferredSize(new Dimension(250, 40));
 		textField.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		textField.setBackground(platno.barvaOzadja);;
-		textField.setToolTipText("Napiši svoj poskus");
-		
-		
-		
+		textField.setToolTipText("Napiï¿½i svoj poskus");
 		
 		besednjak = Logika.novaIgra();
 		
@@ -52,7 +48,6 @@ public class Okno extends JFrame implements ActionListener {
 		platno.add(gumb);
 		platno.add(textField);
 		add(platno);
-		
 		
 		JMenuBar menubar = new JMenuBar();
 		setJMenuBar(menubar);

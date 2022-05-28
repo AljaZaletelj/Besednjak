@@ -47,7 +47,6 @@ public class Platno  extends JPanel{
 	}
 	
 	
-	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -78,7 +77,7 @@ public class Platno  extends JPanel{
 		
 		
 		for (int i = 0; i < Okno.besednjak.steviloNapak +1; i++) {
-			for (int j = 0; j < 5; j++) {
+			for (int j = 0; j < Besednjak.DOLZINA_BESEDE; j++) {
 				if (Okno.besednjak.poskusi[i][j] == Barva.RUMENA) g2.setColor(Color.YELLOW);
 				else if (Okno.besednjak.poskusi[i][j] == Barva.ZELENA) g2.setColor(Color.GREEN);
 				else if (Okno.besednjak.poskusi[i][j] == Barva.BELA) g2.setColor(Color.GRAY);
@@ -93,7 +92,7 @@ public class Platno  extends JPanel{
 			g.drawLine(round(x1 + (i*sirinaKvadrata)), round(y1) , round(x1 + (i*sirinaKvadrata)), round(y6));
 		
 		for (int v = 0; v < Besednjak.STEVILO_POSKUSOV; v++) {
-			for (int j = 0; j < 5; j++) {
+			for (int j = 0; j < Besednjak.DOLZINA_BESEDE; j++) {
 				g.drawString(
 						String.valueOf(Okno.besednjak.ugibanja[v][j]), 
 						round(x1 + (j*sirinaKvadrata) + sirinaKvadrata/3), 
@@ -126,20 +125,10 @@ public class Platno  extends JPanel{
 		else { 
 			g.drawString("ŠE VEDNO IGRAŠ", round(5 * sirina / 8), round(visina/3));
 			}
-			
-		
-		
 		}
-		
-		
-		
-		
 		repaint();
-		
-		
 	}
 
-	
 	
 	public void zaigrajGlasbo(int i) {
 		try {

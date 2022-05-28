@@ -1,27 +1,26 @@
 public class Besednjak {
 
 	protected String geslo;
-	protected Barva[][] poskusi; // dejansko se bo v poskusih zapisovala zgodovina igre. - rezultati
+	protected Barva[][] poskusi; // v poskusih se zapisuje zgodovina igre. - rezultati (barve)
 	// primer poskusa izgleda :
-	//{{bela, bela, zelena, rumena, bela},  {<-},  {<-},  zmaga,  {null, null, null, null, null}}
+	//{{bela, bela, zelena, rumena, bela},  {bela, bela, zelena, rumena, bela},  {bela, bela, zelena, rumena, bela},  zmaga,  {null, null, null, null, null}}
 	protected static int STEVILO_POSKUSOV = 5;
-	protected char[][] ugibanja; // podobno kot poskusi, le da ne zapisuje rezultatov pa� pa samo zgodovino 
+	protected static int DOLZINA_BESEDE = 5;
+	protected char[][] ugibanja; // podobno kot poskusi, le da zapisuje črke ne pa barve
 	protected String crke = "ABCČDEFGHIJKLMNOPRSŠTUVZŽabcčdefghijklmnoprsštuvzž";
 	protected int steviloNapak;
-	protected static Barva[] zmaga = {Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA};
 	protected static Barva[] zacetek;
+	protected static Barva[] zmaga = {Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA, Barva.ZELENA};
 	protected static Barva[] poraz = {Barva.RDECA, Barva.RDECA, Barva.RDECA, Barva.RDECA, Barva.RDECA};
-	protected Barva[] stanje;
-	
+	protected Barva[] stanje; // Označuje rezultat našega zadnjega poskusa	
 	
 	public Besednjak(String geslo) {
 		this.geslo = geslo;
-		this.poskusi = new Barva[STEVILO_POSKUSOV][5];
 		this.steviloNapak = 0;
 		this.stanje = zacetek;
-		this.ugibanja = new char[STEVILO_POSKUSOV][5];
+		this.poskusi = new Barva[STEVILO_POSKUSOV][DOLZINA_BESEDE];
+		this.ugibanja = new char[STEVILO_POSKUSOV][DOLZINA_BESEDE];
 	}
-	
 	
 	@Override  
 	public String toString() {
@@ -29,7 +28,8 @@ public class Besednjak {
 	}
 	
 	public boolean preveriVnos(String poskus) {
-		if (poskus.length() != 5) return false;
+		// funkcija, ki preveri, če je dani vnos ustrezen
+		if (poskus.length() != DOLZINA_BESEDE) return false;
 		char[] ch = poskus.toCharArray();
 		
 		for (char crka : ch) {
@@ -39,12 +39,13 @@ public class Besednjak {
 	}
 	
 	public Barva[] preveriVrstico (String poskus) {
-		Barva[] output = new Barva[5];
+		// preveri vrstico in vrne rezultat v barvah
+		Barva[] output = new Barva[DOLZINA_BESEDE];
 		if (preveriVnos(poskus)) {
 			char[] ch = poskus.toCharArray();
 			this.ugibanja[steviloNapak] = poskus.toCharArray();
 			char[] g = geslo.toCharArray();
-			for (int i=0; i < 5; i++) {
+			for (int i=0; i < DOLZINA_BESEDE; i++) {
 				if (ch[i] == g[i]) output[i] = Barva.ZELENA; 
 				else if (geslo.indexOf(ch[i]) != -1) output[i] = Barva.RUMENA;
 				else output[i] = Barva.BELA;
@@ -55,18 +56,14 @@ public class Besednjak {
 		
 	}
 		
-	public boolean preveriZmago (String poskus) {
+	public boolean zmaga (String poskus) {
+		// preveri, če smo zmagali
 		Barva[] v = preveriVrstico(poskus);
-		for ( int i = 0;  i < 5; ++i) {
+		for ( int i = 0;  i < DOLZINA_BESEDE; ++i) {
 			if (v[i] != Barva.ZELENA) return false ;
 		}
 		return true;
 	
-	}
-	
-	public boolean zmaga(String poskus) {
-		if (preveriZmago(poskus)) return true;
-		return false;
 	}
 	
 	public boolean poraz() {
@@ -74,6 +71,7 @@ public class Besednjak {
 	}
 	
 	public void igraj(String poskus) {
+		// glavna funkcija
 		poskus = poskus.toUpperCase();
         if (zmaga(poskus)) { 
         	stanje = zmaga;
