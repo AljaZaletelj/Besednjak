@@ -40,7 +40,7 @@ public class Okno extends JFrame implements ActionListener {
 		textField.setPreferredSize(new Dimension(250, 40));
 		textField.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		textField.setBackground(platno.barvaOzadja);;
-		textField.setToolTipText("Napi�i svoj poskus");
+		textField.setToolTipText("Napiši svoj poskus");
 		
 		besednjak = Logika.novaIgra();
 		
@@ -88,11 +88,20 @@ public class Okno extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, Navodila.navodilo, "Navodila", JOptionPane.PLAIN_MESSAGE);
 		}
 		else if (e.getSource() == gumb) {
-			besednjak.igraj(textField.getText());  
-			textField.setText("");
+			if(besednjak.preveriVnos(textField.getText())) {
+				besednjak.igraj(textField.getText());
+				textField.setText("");
+				if (besednjak.stanje.equals(Besednjak.zmaga)) platno.zaigrajGlasbo(0);
+				else if (besednjak.stanje == Besednjak.poraz) platno.zaigrajGlasbo(1);	
+			}
+			else {
+				JOptionPane.showMessageDialog(
+						null, 
+						"Tvoj vnos ni bil primeren. Preveri, če ima tvoja beseda pet črk slovenske abecede.",
+						"POZOR",
+						JOptionPane.WARNING_MESSAGE);
+			}
 			
-			if (besednjak.stanje.equals(Besednjak.zmaga)) platno.zaigrajGlasbo(0);
-			else if (besednjak.stanje == Besednjak.poraz) platno.zaigrajGlasbo(1);	
 		}
 		else if (source == gumbNovaIgra) {
 			besednjak = Logika.novaIgra();
